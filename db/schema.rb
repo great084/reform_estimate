@@ -10,7 +10,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_28_124523) do
+ActiveRecord::Schema.define(version: 2020_09_30_133105) do
+
+  create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.string "category_name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "estimate_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "estimate_id", null: false
+    t.bigint "category_id", null: false
+    t.string "item_name", null: false
+    t.string "specification"
+    t.string "unit"
+    t.integer "unit_price", null: false
+    t.integer "quantity", null: false
+    t.integer "price", null: false
+    t.string "remark"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "fk_rails_4c17b5cc76"
+    t.index ["estimate_id"], name: "fk_rails_8c8d3301c8"
+  end
+
+  create_table "estimates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "user_id"
+    t.string "subject", null: false
+    t.string "customer_name", null: false
+    t.integer "subtotal"
+    t.integer "consumption_tax"
+    t.integer "grand_total"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "nickname", default: "", null: false
@@ -25,4 +58,6 @@ ActiveRecord::Schema.define(version: 2020_09_28_124523) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "estimate_details", "categories"
+  add_foreign_key "estimate_details", "estimates"
 end
