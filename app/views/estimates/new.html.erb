@@ -3,7 +3,7 @@
 
 <%= form_with(model: @estimate, local: true) do |f| %>
 
-  <%#= render 'shared/error_messages', object: f.object %>
+  <%= render 'shared/error_messages', object: f.object %>
 
   <%= f.label :subject %>
   <%= f.text_field :subject %>

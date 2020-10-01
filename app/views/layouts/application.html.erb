@@ -15,6 +15,8 @@
           <% if user_signed_in? %>
             <strong><%= current_user.nickname %>さん、こんにちは。</strong>
             <%= link_to 'プロフィール変更', edit_user_registration_path %>
+            <%= link_to '見積一覧', estimates_path %>
+            <%= link_to '見積を新規作成', new_estimate_path %>
             <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
           <% else %>
             <%= link_to 'サインアップ', new_user_registration_path %>

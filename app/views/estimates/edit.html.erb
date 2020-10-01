@@ -1,2 +1,14 @@
-<h1>Estimates#edit</h1>
-<p>Find me in app/views/estimates/edit.html.erb</p>
+<%= form_with(model: @estimate, local: true) do |f| %>
+
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.label :subject %>
+  <%= f.text_field :subject %>
+
+  <%= f.label :customer_name %>
+  <%= f.text_field :customer_name %>
+
+  <%= f.hidden_field :user_id, value: current_user.id %> 
+
+  <%= f.submit '更新する' %>
+<% end %>

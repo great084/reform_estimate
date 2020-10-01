@@ -6,6 +6,7 @@
       <td><%= estimate.customer_name %></td>
       <td><%= estimate.subject %></td>
       <td><%= link_to "詳細", estimate_path(estimate) %></td>
+      <td><%= link_to "編集", edit_estimate_path(estimate) %></td>
     </tr>
     <% end %>
   </table>
