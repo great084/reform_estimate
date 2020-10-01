@@ -1,0 +1,12 @@
+<h1>Estimates#index</h1>
+<p>Find me in app/views/estimates/index.html.erb</p>
+  <table>
+    <% @estimates.each do |estimate| %>
+    <tr>
+      <td><%= estimate.customer_name %></td>
+      <td><%= estimate.subject %></td>
+      <td><%= link_to "詳細", estimate_path(estimate) %></td>
+      <td><%= link_to "編集", edit_estimate_path(estimate) %></td>
+    </tr>
+    <% end %>
+  </table>

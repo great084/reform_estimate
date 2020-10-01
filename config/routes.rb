@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  # get 'estimates/new'
+  # get 'estimates/edit'
+  # get 'estimates/index'
+  # get 'estimates/show'
+  resources :estimates
   devise_for :users
   root 'home#index'
   get 'home/index'
