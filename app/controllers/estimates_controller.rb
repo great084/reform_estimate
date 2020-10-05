@@ -5,20 +5,29 @@ class EstimatesController < ApplicationController
 
   def show
     @estimate = Estimate.find(params[:id])
+    @estimate_details = EstimateDetail.where(estimate_id: params[:id])
   end
 
   def new
-    @estimate = Estimate.new
+    # @estimate = Estimate.new
+    @estimate = Form::Estimate.new
   end
 
   def create
-    @estimate = Estimate.new(estimate_params)
+    # @estimate = Estimate.new(estimate_params)
+    # if @estimate.save
+    #   flash.now[:success] = "見積を作成しました"
+    #   redirect_to estimates_path
+    # else
+    #   puts "#{@estimate.errors.full_messages}"
+    #   flash.now[:danger] = "見積作成に失敗しました"
+    #   render :new
+    # end
+    @estimate = Form::Estimate.new(estimate_params)
+    # debugger
     if @estimate.save
-      flash.now[:success] = "見積を作成しました"
-      redirect_to estimates_path
+      redirect_to estimates_path, notice: "見積 #{@estimate.subject}を登録しました"
     else
-      puts "#{@estimate.errors.full_messages}"
-      flash.now[:danger] = "見積作成に失敗しました"
       render :new
     end
   end
@@ -42,7 +51,13 @@ class EstimatesController < ApplicationController
   private
 
   def estimate_params
-    params.require(:estimate).permit(:user_id, :subject, :customer_name)
+    # params.require(:estimate).permit(:user_id, :subject, :customer_name)
+    params
+      .require(:form_estimate)
+      .permit(
+        Form::Estimate::REGISTRABLE_ATTRIBUTES +
+        [estimate_details_attributes: Form::EstimateDetail::REGISTRABLE_ATTRIBUTES]
+      )
   end
 
 end
