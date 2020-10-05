@@ -22,6 +22,8 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # Devise
 gem 'devise'
 
+gem 'cocoon'
+
 # デバッグ用
 gem 'pry-rails'
 gem 'pry-byebug'
