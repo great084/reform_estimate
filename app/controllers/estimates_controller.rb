@@ -9,22 +9,14 @@ class EstimatesController < ApplicationController
   end
 
   def new
-    # @estimate = Estimate.new
-    @estimate = Form::Estimate.new
+    @estimate = Estimate.new
+    # @estimate = Form::Estimate.new
   end
 
   def create
-    # @estimate = Estimate.new(estimate_params)
-    # if @estimate.save
-    #   flash.now[:success] = "見積を作成しました"
-    #   redirect_to estimates_path
-    # else
-    #   puts "#{@estimate.errors.full_messages}"
-    #   flash.now[:danger] = "見積作成に失敗しました"
-    #   render :new
-    # end
-    @estimate = Form::Estimate.new(estimate_params)
-    # debugger
+    # @estimate = Form::Estimate.new(estimate_params)
+    @estimate = Estimate.new(estimate_params)
+    debugger
     if @estimate.save
       redirect_to estimates_path, notice: "見積 #{@estimate.subject}を登録しました"
     else
@@ -34,11 +26,14 @@ class EstimatesController < ApplicationController
 
   def edit
     @estimate = Estimate.find(params[:id])
+    # @estimate = Form::Estimate.find(params[:id])
   end
 
   def update
     @estimate = Estimate.find(params[:id])
-    if @estimate.update_attributes(estimate_params)
+    # @estimate = Form::Estimate.find(params[:id])
+    debugger
+    if @estimate.update!(estimate_params)
       flash.now[:success] = "見積を更新しました"
       redirect_to estimate_path(@estimate)
     else
@@ -52,11 +47,20 @@ class EstimatesController < ApplicationController
 
   def estimate_params
     # params.require(:estimate).permit(:user_id, :subject, :customer_name)
+
+    # params
+      # .require(:form_estimate)
+      # .permit(
+      #   Form::Estimate::REGISTRABLE_ATTRIBUTES +
+      #   [estimate_details_attributes: Form::EstimateDetail::REGISTRABLE_ATTRIBUTES]
+      # )
+      # params.require(:form_estimate).permit(:user_id, :subject, :customer_name, estimate_details_attributes: [:id, :unit_price, :quantity, :_destroy])
+      # params.require(:estimate).permit(:user_id, :subject, :customer_name, estimate_details_attributes: [:id, :unit_price, :quantity, :_destroy])
     params
-      .require(:form_estimate)
+      .require(:estimate)
       .permit(
-        Form::Estimate::REGISTRABLE_ATTRIBUTES +
-        [estimate_details_attributes: Form::EstimateDetail::REGISTRABLE_ATTRIBUTES]
+        Estimate::REGISTRABLE_ATTRIBUTES +
+        [estimate_details_attributes: EstimateDetail::REGISTRABLE_ATTRIBUTES]
       )
   end
 

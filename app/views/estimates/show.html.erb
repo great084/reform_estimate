@@ -4,3 +4,16 @@
 小計：<%= @estimate.subtotal %> <br />
 消費税：<%= @estimate.consumption_tax %> <br />
 総計：<%= @estimate.grand_total %> <br />
+
+
+<% @estimate_details.each do |ed|  %>
+  <%= ed.id %>
+  <%= ed.category_id %>
+  <%=  ed.item_name %>
+  <%=  ed.specification  %>
+  <%= ed.unit  %>
+  <%= ed.unit_price  %>
+  <%= ed.quantity %>
+  <%= ed.price %>
+  <br>
+<% end %>
