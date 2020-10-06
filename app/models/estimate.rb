@@ -12,7 +12,7 @@ class Estimate < ApplicationRecord
 
   def calculate_estimate_price
     estimate_details.each(&:calculate_estimate_detail_price)
-    self.subtotal = estimate_details.map(&:price).sum
+    self.subtotal = estimate_details.map { |ed| ed.price unless ed.marked_for_destruction?}.compact.sum
   end
 
 end

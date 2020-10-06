@@ -10,13 +10,11 @@ class EstimatesController < ApplicationController
 
   def new
     @estimate = Estimate.new
-    # @estimate = Form::Estimate.new
   end
 
   def create
-    # @estimate = Form::Estimate.new(estimate_params)
     @estimate = Estimate.new(estimate_params)
-    debugger
+    # debugger
     if @estimate.save
       redirect_to estimates_path, notice: "見積 #{@estimate.subject}を登録しました"
     else
@@ -26,13 +24,11 @@ class EstimatesController < ApplicationController
 
   def edit
     @estimate = Estimate.find(params[:id])
-    # @estimate = Form::Estimate.find(params[:id])
   end
 
   def update
     @estimate = Estimate.find(params[:id])
-    # @estimate = Form::Estimate.find(params[:id])
-    debugger
+    # debugger
     if @estimate.update!(estimate_params)
       flash.now[:success] = "見積を更新しました"
       redirect_to estimate_path(@estimate)
@@ -46,16 +42,6 @@ class EstimatesController < ApplicationController
   private
 
   def estimate_params
-    # params.require(:estimate).permit(:user_id, :subject, :customer_name)
-
-    # params
-      # .require(:form_estimate)
-      # .permit(
-      #   Form::Estimate::REGISTRABLE_ATTRIBUTES +
-      #   [estimate_details_attributes: Form::EstimateDetail::REGISTRABLE_ATTRIBUTES]
-      # )
-      # params.require(:form_estimate).permit(:user_id, :subject, :customer_name, estimate_details_attributes: [:id, :unit_price, :quantity, :_destroy])
-      # params.require(:estimate).permit(:user_id, :subject, :customer_name, estimate_details_attributes: [:id, :unit_price, :quantity, :_destroy])
     params
       .require(:estimate)
       .permit(
