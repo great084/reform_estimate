@@ -5,7 +5,7 @@ class EstimateDetail < ApplicationRecord
 
 
   def selectable_categories
-    Category.all
+    Category.where(user_id: current_user.id)
   end
 
   def calculate_estimate_detail_price

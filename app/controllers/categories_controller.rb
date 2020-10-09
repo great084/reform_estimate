@@ -10,7 +10,7 @@ class CategoriesController < ApplicationController
   
   def update
     # debugger
-    binding.pry
+    # binding.pry
     categories_params.each do |id, category_param|
       category = Category.find(id) 
       category.update(category_param)
