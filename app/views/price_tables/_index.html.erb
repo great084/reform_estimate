@@ -7,7 +7,7 @@
         <th>単位</th>
         <th>単価</th>
         <th>備考</th>
-        <th></th>
+        <th>操作</th>
       </tr>
     </thead>
 
@@ -20,7 +20,36 @@
           <td><%= pt.unit %></td>
           <td><%= pt.unit_price %></td>
           <td><%= pt.remark %></td>
+          <td><%= link_to '更新', edit_price_table_path(pt)  %></td>
         </tr>
       <% end %>
     </tbody>
   </table>
+  
+      <% @price_tables.each do |pt|%>
+      <%= form_for(pt, url: price_table_path(pt), method: :put) do |f| %>
+        <div class="form-row">
+            <%#= f.hidden_field :id %>
+            <div class="form-group col-2">
+              <%= f.collection_select :category_id, f.object.selectable_categories(current_user.id), :id, :category_name, {}, class: 'form-control' %>
+            </div>
+            <div class="form-group col-2">
+              <%= f.text_field :item_name ,id: 'inputItemName', class: 'form-control'%>
+            </div>
+            <div class="form-group col-2">
+              <%= f.text_field :specification, id: 'inputSpecification', class: 'form-control' %>
+            </div>
+            <div class="form-group col-2">
+              <%= f.text_field :unit, id: 'inputUnit', class: 'form-control' %>
+            </div>
+            <div class="form-group col-2">
+              <%= f.number_field :unit_price, id: 'inputUnitPrice', class: 'form-control' %>
+            </div>
+            <div class="form-group col-1">
+              <%= f.text_field :remark, id: 'inputRemark', class: 'form-control' %>
+            </div>    
+            <%= f.submit '更新',  class: 'col-1 btn btn-primary btn-small' %>
+        </div>
+      <% end %>
+      <% end %>
+

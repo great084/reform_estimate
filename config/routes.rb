@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # get 'estimates/show'
   resources :estimates
   resource :categories, only: [:index, :create, :update, :destroy]
-  resources :price_tables, only: [:index, :create, :update, :destroy]
+  resources :price_tables, only: [:index, :create, :edit, :update, :destroy]
   resources :masters, only: [:index]
   devise_for :users
   root 'home#index'

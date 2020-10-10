@@ -28,10 +28,10 @@ class EstimatesController < ApplicationController
 
   def update
     @estimate = Estimate.find(params[:id])
-    debugger
+    # debugger
     if @estimate.update!(estimate_params)
       flash.now[:success] = "見積を更新しました"
-      redirect_to estimate_path(@estimate)
+      redirect_to edit_estimate_path(@estimate)
     else
       puts "#{@estimate.errors.full_messages}"
       flash.now[:danger] = "見積更新できませんでした"

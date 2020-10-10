@@ -20,11 +20,11 @@
           <label for="inputUnitPrice">単価</label>
           <%= f.number_field :unit_price, id: 'inputUnitPrice', class: 'form-control' %>
         </div>
-        <div class="form-group col-2">
+        <div class="form-group col-1">
           <label for="inputRemark">備考</label>
           <%= f.text_field :remark, id: 'inputRemark', class: 'form-control' %>
-        </div>    
+        </div>
+        <%= f.submit '新規登録',  class: 'col-1' %>
       </div>
-  <%= f.submit '新規登録',  class: 'btn btn-primary' %>
 <% end %>
 
