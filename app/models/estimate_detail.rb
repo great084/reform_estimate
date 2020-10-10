@@ -4,8 +4,8 @@ class EstimateDetail < ApplicationRecord
   REGISTRABLE_ATTRIBUTES = %i(id category_id item_name specification unit unit_price quantity price remark _destroy)
 
 
-  def selectable_categories
-    Category.all
+  def selectable_categories(user_id)
+    Category.where(user_id: user_id)
   end
 
   def calculate_estimate_detail_price
