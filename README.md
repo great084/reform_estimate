@@ -5,6 +5,10 @@ application up and running.
 
 Things you may want to cover:
 
+## 目的
+
+## 使い方
+
 * Ruby version
 
 * System dependencies
