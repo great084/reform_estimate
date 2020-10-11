@@ -10,7 +10,7 @@ class CreatePriceTables < ActiveRecord::Migration[6.0]
       t.string :remark
       t.timestamps
     end
-    add_foreign_key "price_tables", "users"
-    add_foreign_key "price_tables", "categories"
+    add_foreign_key 'price_tables', 'users'
+    add_foreign_key 'price_tables', 'categories'
   end
 end

@@ -30,24 +30,23 @@ class EstimatesController < ApplicationController
     @estimate = Estimate.find(params[:id])
     # debugger
     if @estimate.update!(estimate_params)
-      flash.now[:success] = "見積を更新しました"
+      flash.now[:success] = '見積を更新しました'
       redirect_to edit_estimate_path(@estimate)
     else
-      puts "#{@estimate.errors.full_messages}"
-      flash.now[:danger] = "見積更新できませんでした"
+      # puts "#{@estimate.errors.full_messages}"
+      flash.now[:danger] = '見積更新できませんでした'
       render :edit
     end
   end
 
   private
 
-  def estimate_params
-    params
-      .require(:estimate)
-      .permit(
-        Estimate::REGISTRABLE_ATTRIBUTES +
-        [estimate_details_attributes: EstimateDetail::REGISTRABLE_ATTRIBUTES]
-      )
-  end
-
+    def estimate_params
+      params
+        .require(:estimate)
+        .permit(
+          Estimate::REGISTRABLE_ATTRIBUTES +
+          [estimate_details_attributes: EstimateDetail::REGISTRABLE_ATTRIBUTES]
+        )
+    end
 end

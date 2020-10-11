@@ -22,10 +22,10 @@ class PriceTablesController < ApplicationController
 
   private
 
-  def price_table_params
-    params
-      .require(:price_table)
-      .permit(:category_id, :item_name, :specification, :unit, :unit_price, :remark)
-      .merge(user_id: current_user.id)
-  end
+    def price_table_params
+      params
+        .require(:price_table)
+        .permit(:category_id, :item_name, :specification, :unit, :unit_price, :remark)
+        .merge(user_id: current_user.id)
+    end
 end

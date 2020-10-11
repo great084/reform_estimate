@@ -1,0 +1,3 @@
+Rails/NotNullColumn:
+  Exclude:
+    - 'db/migrate/20201008095546_add_column_to_category.rb'

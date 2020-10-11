@@ -12,7 +12,7 @@ class CreateEstimateDetails < ActiveRecord::Migration[6.0]
       t.string :remark
       t.timestamps
     end
-    add_foreign_key "estimate_details", "estimates"
-    add_foreign_key "estimate_details", "categories"
+    add_foreign_key 'estimate_details', 'estimates'
+    add_foreign_key 'estimate_details', 'categories'
   end
 end
