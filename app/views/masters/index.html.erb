@@ -1,9 +1,9 @@
 <div class="row">
   <div class="col-md-4">
-    <%= render 'categories/form' %>
+    <%= render partial: 'categories/form', locals: { categories: @categories, category: @category} %>
   </div>
   <div class="col-md-8">
-    <%= render 'price_tables/index' %>
-    <%= render 'price_tables/form' %>
+    <%= render partial: 'price_tables/index', locals: { price_tables: @price_tables } %>
+    <%= render partial: 'price_tables/form', locals: { price_table: @price_table } %>
   </div>
 </div>
