@@ -16,7 +16,8 @@
           <% if user_signed_in? %>
             <strong><%= current_user.nickname %>さん、こんにちは。</strong>
             <%= link_to 'プロフィール変更', edit_user_registration_path %>
-            <%= link_to 'マスタ登録', masters_path %>
+            <%= link_to 'カテゴリ登録', categories_path %>
+            <%= link_to '単価表登録', price_tables_path %>
             <%= link_to '見積一覧', estimates_path %>
             <%= link_to '見積を新規作成', new_estimate_path %>
             <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
@@ -27,8 +28,11 @@
       </nav>
     </header>
 
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+      <% flash.each do |key, value| %>
+          <p class="alert alert-<%= key %>">
+            <%= value %><button type="button" class="close" data-dismiss="alert">&times;</button>
+          </p>
+      <% end %>
 
     <%= yield %>
   </body>
