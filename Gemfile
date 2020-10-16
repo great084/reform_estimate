@@ -34,6 +34,7 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'rubocop-rails'
   gem 'pre-commit'
+  gem 'rails_best_practices'
 end
 
 group :development do
