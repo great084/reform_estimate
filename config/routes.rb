@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   # get 'estimates/index'
   # get 'estimates/show'
   resources :estimates, except: [:destroy]
-  resource :categories, only: [:create, :update]
-  resources :price_tables, only: [:create, :update]
+  resources :categories, only: [:index, :create, :update, :destroy]
+  resources :price_tables, only: [:index, :create, :update, :destroy]
   resources :masters, only: [:index]
   devise_for :users
   root 'home#index'
