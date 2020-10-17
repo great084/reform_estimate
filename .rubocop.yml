@@ -17,6 +17,7 @@ AllCops:
     - 'db/seeds.rb'
     # - 'db/migrate/*'
     - 'Gemfile'
+    - 'spec/**/*'
 
 
 # 日本語でのコメントを許可
