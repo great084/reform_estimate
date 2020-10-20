@@ -1,4 +1,5 @@
 class CategoriesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_category, only: %i[update destroy]
 
   def index
@@ -8,6 +9,7 @@ class CategoriesController < ApplicationController
 
   def create
     @category = Category.new(category_params)
+    # binding.pry
     if @category.save
       flash[:success] = '登録しました。'
       redirect_to index
