@@ -1,7 +1,27 @@
+  <ul id="categoriesTabs" class="nav nav-tabs justify-content-center">
+    <% @categories.each_with_index do |category, i| %>
+      <%# binding.pry %>
+      <% if category.id == @active_category_id %>
+        <li role="presentation" class="active">
+          <%= link_to price_tables_path(id: category.id) do %>
+            <button aria-controls="spot-tab" role="tab" class="nav-link active"><%= category.category_name %></button>
+          <% end %>
+        </li>
+      <% else %>
+        <li role="presentation">
+          <%= link_to price_tables_path(id: category.id) do %>
+            <button aria-controls="spot-tab" role="tab" class="nav-link "><%= category.category_name %></button>
+          <% end %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+ 
+
 <table class="table table-list">
   <thead>
     <tr>
-      <th>カテゴリー</th>
+      <th>カテゴリー</th> 
       <th>商品名</th>
       <th>仕様</th>
       <th>単位</th>
@@ -36,9 +56,11 @@
         <div class="form-group col-2">
           <%= f.text_field :remark, id: 'inputRemark', class: 'form-control' %>
         </div>
-        <div class="form-group col-2">
-          <%= f.submit '更新',  class: ' btn btn-primary btn-small' %>
-          <%= link_to '削除', price_table_path(pt), method: :delete, class: 'col-1 btn btn-primary btn-small' %>
+        <div class="form-group col-1">
+          <%= f.submit '更新',  class: ' btn btn-primary btn-block ' %>
+        </div>
+        <div class="form-group col-1">
+          <%= link_to '削除', price_table_path(pt), method: :delete, class: 'btn btn-secondary btn-block ' %>
         </div>
     </div>
   <% end %>
@@ -67,7 +89,7 @@
           <%= f.text_field :remark, id: 'inputRemark', class: 'form-control' %>
         </div>
         <div class="form-group col-2">
-          <%= f.submit '登録',  class: ' btn btn-notice btn-small' %>
+          <%= f.submit '新規登録',  class: ' btn btn-success btn-block' %>
         </div>
     </div>
   <% end %>

@@ -2,8 +2,10 @@ class PriceTablesController < ApplicationController
   before_action :set_price_table, only: %i[update destroy]
 
   def index
-    @price_tables = current_user.price_tables
-    @price_table = PriceTable.new
+    @categories = current_user.categories.order(category_name: :asc)
+    @active_category_id = params[:id] ? params[:id].to_i : @categories.first.id
+    @price_tables = current_user.price_tables.where(category_id: @active_category_id)
+    @price_table = PriceTable.new(category_id: @active_category_id)
   end
 
   def create
@@ -12,7 +14,7 @@ class PriceTablesController < ApplicationController
     # binding.pry
     if @price_table.save
       flash[:success] = '登録しました。'
-      redirect_to price_tables_path
+      redirect_to price_tables_path(id: @price_table.category_id)
     else
       render_index('登録に失敗しました。')
     end
@@ -22,7 +24,7 @@ class PriceTablesController < ApplicationController
     # binding.pry
     if @price_table.update(price_table_params)
       flash[:success] = '更新しました。'
-      redirect_to index
+      redirect_to price_tables_path(id: @price_table.category_id)
     else
       render_index('更新に失敗しました。')
     end
@@ -31,7 +33,7 @@ class PriceTablesController < ApplicationController
   def destroy
     if @price_table.destroy
       flash[:success] = '削除しました。'
-      redirect_to index
+      redirect_to price_tables_path(id: @price_table.category_id)
     else
       render_index('削除に失敗しました。')
     end
