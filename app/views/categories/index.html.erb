@@ -31,8 +31,12 @@
       <div class="form-group col-4">
         <%= f.text_field :category_name, class: 'form-control'%>
       </div>
-      <%= f.submit '更新',  class: 'col-1 btn btn-primary btn-small' %>
-      <%= link_to '削除', category_path(category), method: :delete, class: 'col-1 btn btn-primary btn-small' %>
+      <div class="form-group col-1">
+        <%= f.submit '更新',  class: 'btn btn-primary btn-block' %>
+      </div>
+      <div class="form-group col-1">
+        <%= link_to '削除', category_path(category), method: :delete, class: 'btn btn-secondary btn-block' %>
+      </div>
     </div>
   <% end %>
 <% end %>
@@ -44,6 +48,8 @@
     <div class="form-group col-4">
       <%= f.text_field :category_name, class: 'form-control' %>
     </div>
-    <%= f.submit '新規登録',  class: 'col-1 btn btn-normal' %>
+    <div class="col-2">
+      <%= f.submit '新規登録',  class: 'btn btn-success btn-block' %>
+    </div>
   </div>
 <% end %>
