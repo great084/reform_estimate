@@ -54,12 +54,12 @@ class CategoriesController < ApplicationController
     end
 
     # def categories_params
-    #   params.permit(categories: %i[id category_name])[:categories]
-    #   # params.require(:categories).permit(:id, :category_name)
+    #   params.permit(categories: %i[id name])[:categories]
+    #   # params.require(:categories).permit(:id, :name)
     # end
 
     def category_params
-      params.require(:category).permit(:category_name).merge(user_id: current_user.id)
+      params.require(:category).permit(:name).merge(user_id: current_user.id)
     end
 
     def render_index(msg)

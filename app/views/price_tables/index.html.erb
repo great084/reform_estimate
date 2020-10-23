@@ -4,13 +4,13 @@
       <% if category.id == @active_category_id %>
         <li role="presentation" class="active">
           <%= link_to price_tables_path(id: category.id) do %>
-            <button aria-controls="spot-tab" role="tab" class="nav-link active"><%= category.category_name %></button>
+            <button aria-controls="spot-tab" role="tab" class="nav-link active"><%= category.name %></button>
           <% end %>
         </li>
       <% else %>
         <li role="presentation">
           <%= link_to price_tables_path(id: category.id) do %>
-            <button aria-controls="spot-tab" role="tab" class="nav-link "><%= category.category_name %></button>
+            <button aria-controls="spot-tab" role="tab" class="nav-link "><%= category.name %></button>
           <% end %>
         </li>
       <% end %>
@@ -39,7 +39,7 @@
     <div class="form-row">
         <%#= f.hidden_field :id %>
         <div class="form-group col-2">
-          <%= f.collection_select :category_id, f.object.selectable_categories(current_user.id), :id, :category_name, {}, class: 'form-control' %>
+          <%= f.collection_select :category_id, f.object.selectable_categories(current_user.id), :id, :name, {}, class: 'form-control' %>
         </div>
         <div class="form-group col-2">
           <%= f.text_field :item_name ,id: 'inputItemName', class: 'form-control'%>
@@ -71,7 +71,7 @@
     <div class="form-row">
         <%#= f.hidden_field :id %>
         <div class="form-group col-2">
-          <%= f.collection_select :category_id, f.object.selectable_categories(current_user.id), :id, :category_name, {}, class: 'form-control' %>
+          <%= f.collection_select :category_id, f.object.selectable_categories(current_user.id), :id, :name, {}, class: 'form-control' %>
         </div>
         <div class="form-group col-2">
           <%= f.text_field :item_name ,id: 'inputItemName', class: 'form-control'%>

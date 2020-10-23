@@ -2,7 +2,7 @@ class PriceTablesController < ApplicationController
   before_action :set_price_table, only: %i[update destroy]
 
   def index
-    @categories = current_user.categories.order(category_name: :asc)
+    @categories = current_user.categories.order(name: :asc)
     @active_category_id = params[:id] ? params[:id].to_i : @categories.first.id
     @price_tables = current_user.price_tables.where(category_id: @active_category_id)
     @price_table = PriceTable.new(category_id: @active_category_id)
