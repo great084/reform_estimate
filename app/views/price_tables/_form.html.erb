@@ -2,7 +2,7 @@
     <div class="form-row">
         <div class="form-group col-2">
           <label for="selectCategory">カテゴリー</label>
-          <%= f.collection_select :category_id, f.object.selectable_categories(current_user.id), :id, :category_name, {}, class: 'form-control' %>
+          <%= f.collection_select :category_id, f.object.selectable_categories(current_user.id), :id, :name, {}, class: 'form-control' %>
         </div>
         <div class="form-group col-2">
           <label for="inputItemName">商品名</label>

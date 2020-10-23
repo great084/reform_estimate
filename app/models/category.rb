@@ -3,7 +3,7 @@ class Category < ApplicationRecord
   has_many :estimate_details, dependent: :destroy
   has_many :price_tables, dependent: :destroy
 
-  validates :user_id, uniqueness: { scope: :category_name }
+  validates :user_id, uniqueness: { scope: :name }
 
-  Scope :sorted, -> { order(category_name: :asc) }
+  scope :sorted, -> { order(name: :asc) }
 end
