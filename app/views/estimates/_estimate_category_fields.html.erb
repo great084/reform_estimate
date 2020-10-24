@@ -1,0 +1,14 @@
+
+<tr class="nested-fields">
+  <%= f.hidden_field :id %>
+  <td>
+  <%#= f.text_field :name, class: 'form-control' %>
+  <%= f.collection_select :category_id, selectable_categories, :id, :name, {}, class: 'form-control' %>
+  </td>
+  <td>
+  <%= f.text_field :subtotal, class: 'form-control subtotal', disabled: true %>
+  </td>
+  <td>
+  <%= link_to_remove_association '削除', f, class: 'btn btn-default' %>
+  </td>
+</tr>

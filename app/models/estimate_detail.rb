@@ -1,8 +1,7 @@
 class EstimateDetail < ApplicationRecord
-  belongs_to :estimate
-  belongs_to :category
+  belongs_to :estimate_category
   REGISTRABLE_ATTRIBUTES =
-    %i[id category_id item_name specification unit unit_price quantity price remark _destroy].freeze
+    %i[estimate_category_id item_name specification unit unit_price quantity price remark _destroy].freeze
 
   def selectable_categories(user_id)
     Category.where(user_id: user_id)

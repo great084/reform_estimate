@@ -72,14 +72,15 @@ estimate1.estimate_categories.create(estimate_categories_params)
 
 # EstimateDetailデータ
 estimate1 = Estimate.find_by(subject: '見積サンプル1')
+estimate_category1 = EstimateCategory.find_by(estimate_id: estimate1.id, category_id: category1.id)
 pt1 = PriceTable.find_by(category_id: category2.id, item_name: '壁ビニールクロス', specification: 'SP-9901')
 pt2 = PriceTable.find_by(category_id: category2.id, item_name: '天井ビニールクロス', specification: 'SP-9901')
 pt3 = PriceTable.find_by(category_id: category2.id, item_name: 'タイル貼り', specification: 'TL-46031')
 pt4 = PriceTable.find_by(category_id: category2.id, item_name: '運搬搬入費', specification: nil)
 
 estimate_details_params = [
-  {category_id: pt1.category_id, item_name: pt1.item_name, specification: pt1.specification, unit: pt1.unit, unit_price: pt1.unit_price, quantity: 1000, price: 200000, remark: '備品'},
-  {category_id: pt2.category_id, item_name: pt2.item_name, specification: pt2.specification, unit: pt2.unit, unit_price: pt2.unit_price, quantity: 500, price: pt2.unit_price*500, remark: '備品'},
+  {estimate_category_id: pt1.category_id, item_name: pt1.item_name, specification: pt1.specification, unit: pt1.unit, unit_price: pt1.unit_price, quantity: 1000, price: 200000, remark: '備品'},
+  {estimate_category_id: pt2.category_id, item_name: pt2.item_name, specification: pt2.specification, unit: pt2.unit, unit_price: pt2.unit_price, quantity: 500, price: pt2.unit_price*500, remark: '備品'},
 ]
 
-estimate1.estimate_details.create(estimate_details_params)
+estimate_category1.estimate_details.create(estimate_details_params)

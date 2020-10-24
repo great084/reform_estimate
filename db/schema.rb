@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_23_093827) do
+ActiveRecord::Schema.define(version: 2020_10_24_125656) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -32,8 +32,6 @@ ActiveRecord::Schema.define(version: 2020_10_23_093827) do
   end
 
   create_table "estimate_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "estimate_id", null: false
-    t.bigint "category_id", null: false
     t.string "item_name", null: false
     t.string "specification"
     t.string "unit"
@@ -43,8 +41,8 @@ ActiveRecord::Schema.define(version: 2020_10_23_093827) do
     t.string "remark"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "fk_rails_4c17b5cc76"
-    t.index ["estimate_id"], name: "fk_rails_8c8d3301c8"
+    t.bigint "estimate_category_id", null: false
+    t.index ["estimate_category_id"], name: "index_estimate_details_on_estimate_category_id"
   end
 
   create_table "estimates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -68,6 +66,7 @@ ActiveRecord::Schema.define(version: 2020_10_23_093827) do
     t.string "remark"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
     t.index ["category_id", "item_name", "specification"], name: "price_tables_uk", unique: true
   end
 
@@ -87,8 +86,7 @@ ActiveRecord::Schema.define(version: 2020_10_23_093827) do
   add_foreign_key "categories", "users"
   add_foreign_key "estimate_categories", "categories"
   add_foreign_key "estimate_categories", "estimates"
-  add_foreign_key "estimate_details", "categories"
-  add_foreign_key "estimate_details", "estimates"
+  add_foreign_key "estimate_details", "estimate_categories"
   add_foreign_key "estimates", "users"
   add_foreign_key "price_tables", "categories"
 end

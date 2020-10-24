@@ -39,3 +39,8 @@ Metrics/MethodLength:
 # private/protected は一段深くインデントする
 Style/IndentationConsistency:
   EnforcedStyle: indented_internal_methods
+
+#Rails/BulkChangeTableは対応コストがかかるので、無視する
+Rails/BulkChangeTable:
+  Exclude:
+    - 'db/migrate/*'
