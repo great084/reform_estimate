@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_23_045844) do
+ActiveRecord::Schema.define(version: 2020_10_23_093827) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -18,6 +18,17 @@ ActiveRecord::Schema.define(version: 2020_10_23_045844) do
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "user_id", null: false
     t.index ["user_id", "name"], name: "index_categories_on_user_id_and_name", unique: true
+  end
+
+  create_table "estimate_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "estimate_id", null: false
+    t.bigint "category_id", null: false
+    t.string "name", null: false
+    t.integer "subtotal", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "fk_rails_cd7b932439"
+    t.index ["estimate_id"], name: "fk_rails_8a94945cb2"
   end
 
   create_table "estimate_details", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -49,7 +60,6 @@ ActiveRecord::Schema.define(version: 2020_10_23_045844) do
   end
 
   create_table "price_tables", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.bigint "category_id", null: false
     t.string "item_name", null: false
     t.string "specification"
@@ -58,8 +68,7 @@ ActiveRecord::Schema.define(version: 2020_10_23_045844) do
     t.string "remark"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "fk_rails_57d0bf2037"
-    t.index ["user_id", "item_name", "specification"], name: "index_price_tables_on_user_id_and_item_name_and_specification", unique: true
+    t.index ["category_id", "item_name", "specification"], name: "price_tables_uk", unique: true
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -76,9 +85,10 @@ ActiveRecord::Schema.define(version: 2020_10_23_045844) do
   end
 
   add_foreign_key "categories", "users"
+  add_foreign_key "estimate_categories", "categories"
+  add_foreign_key "estimate_categories", "estimates"
   add_foreign_key "estimate_details", "categories"
   add_foreign_key "estimate_details", "estimates"
   add_foreign_key "estimates", "users"
   add_foreign_key "price_tables", "categories"
-  add_foreign_key "price_tables", "users"
 end

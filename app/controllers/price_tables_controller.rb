@@ -3,8 +3,8 @@ class PriceTablesController < ApplicationController
 
   def index
     @categories = current_user.categories.order(name: :asc)
-    @active_category_id = params[:id] ? params[:id].to_i : @categories.first.id
-    @price_tables = current_user.price_tables.where(category_id: @active_category_id)
+    @active_category = params[:id] ? @categories.find(params[:id]) : @categories.first
+    @price_tables = @active_category.price_tables
     @price_table = PriceTable.new(category_id: @active_category_id)
   end
 

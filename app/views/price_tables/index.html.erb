@@ -1,7 +1,7 @@
   <ul id="categoriesTabs" class="nav nav-tabs justify-content-center">
     <% @categories.each_with_index do |category, i| %>
       <%# binding.pry %>
-      <% if category.id == @active_category_id %>
+      <% if category == @active_category %>
         <li role="presentation" class="active">
           <%= link_to price_tables_path(id: category.id) do %>
             <button aria-controls="spot-tab" role="tab" class="nav-link active"><%= category.name %></button>

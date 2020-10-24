@@ -3,6 +3,8 @@ class Estimate < ApplicationRecord
 
   belongs_to :user
   has_many :estimate_details, dependent: :destroy
+  has_many :estimate_categories, dependent: :destroy
+
   accepts_nested_attributes_for :estimate_details, allow_destroy: true
   before_validation :calculate_estimate_price
 
