@@ -1,21 +1,19 @@
 <%= form_for(estimate, url: path, method: method) do |f| %>
 
   <%= f.hidden_field :user_id, value: current_user.id %>
-  <label class="control-label" for="">見積名称</label>
+  
+  <%= f.label :subject, "見積名称" %>
   <%= f.text_field :subject, class: 'form-control' %>
 
-  <label class="control-label" for="">顧客名</label>
+  <%= f.label :customer_name, "顧客名" %>
   <%= f.text_field :customer_name, class: 'form-control' %>
 
-  <b>カテゴリー</b>
-  <div class="text-right">
-    <%= link_to_add_association '明細を追加', f, :estimate_categories,
-      class: 'btn btn-default',
-      data: {
-        association_insertion_node: '#category-association-insertion-point',
-        association_insertion_method: 'append' }
-     %>
-  </div>
+  <label class="control-label" for="">見積合計</label>
+  <%= f.text_field :subtotal, class: 'form-control total',
+      disabled: true,
+      value: number_to_currency(f.object.subtotal) %>
+
+  <h2 class="mt-4">カテゴリー</h2>
 
   <table class="table table-list">
     <thead>
@@ -33,22 +31,16 @@
     <% end %>
     </div>
     </tbody>
-
-<% if false %>
-    <tbody id='detail-association-insertion-point'>
-    <div class="form-group">
-    <%= f.fields_for :estimate_details do |ed| %>
-      <%= render 'estimate_detail_fields', f: ed %>
-    <% end %>
-    </div>
-    </tbody>
-<% end %>
   </table>
 
-  <label class="control-label" for="">見積合計</label>
-  <%= f.text_field :subtotal, class: 'form-control total',
-      disabled: true,
-      value: number_to_currency(f.object.subtotal) %>
+  <div class="text-left">
+    <%= link_to_add_association 'カテゴリーを追加', f, :estimate_categories,
+      class: 'btn btn-default',
+      data: {
+        association_insertion_node: '#category-association-insertion-point',
+        association_insertion_method: 'append' }
+     %>
+  </div>
 
   <%= f.submit '登録', class: 'btn btn-primary' %>
 <% end %>
