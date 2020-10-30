@@ -3,9 +3,9 @@ class PriceTablesController < ApplicationController
 
   def index
     @categories = current_user.categories.order(name: :asc)
-    @active_category_id = params[:id] ? params[:id].to_i : @categories.first.id
-    @price_tables = current_user.price_tables.where(category_id: @active_category_id)
-    @price_table = PriceTable.new(category_id: @active_category_id)
+    @active_category = params[:id] ? @categories.find(params[:id]) : @categories.first
+    @price_tables = @active_category.price_tables
+    @price_table = PriceTable.new(category_id: @active_category.id)
   end
 
   def create
@@ -49,7 +49,7 @@ class PriceTablesController < ApplicationController
       params
         .require(:price_table)
         .permit(:category_id, :price_table_id, :item_name, :specification, :unit, :unit_price, :remark)
-        .merge(user_id: current_user.id)
+      # .merge(user_id: current_user.id)
     end
 
     def render_index(msg)

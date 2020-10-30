@@ -5,5 +5,4 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :estimates, dependent: :destroy
   has_many :categories, dependent: :destroy
-  has_many :price_tables, dependent: :destroy
 end

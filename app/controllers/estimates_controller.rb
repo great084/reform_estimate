@@ -5,7 +5,9 @@ class EstimatesController < ApplicationController
 
   def show
     @estimate = Estimate.find(params[:id])
-    @estimate_details = EstimateDetail.where(estimate_id: params[:id])
+    @estimate_categories = @estimate.estimate_categories
+    @active_category = params[:id] ? @estimate_categories.find(params[:id]) : @estimate_categories.first
+    @estimate_details = @active_category.estimate_details
   end
 
   def new
@@ -41,12 +43,20 @@ class EstimatesController < ApplicationController
 
   private
 
+    # def estimate_params
+    #   params
+    #     .require(:estimate)
+    #     .permit(
+    #       Estimate::REGISTRABLE_ATTRIBUTES +
+    #       [estimate_details_attributes: EstimateDetail::REGISTRABLE_ATTRIBUTES]
+    #     )
+    # end
     def estimate_params
       params
         .require(:estimate)
         .permit(
           Estimate::REGISTRABLE_ATTRIBUTES +
-          [estimate_details_attributes: EstimateDetail::REGISTRABLE_ATTRIBUTES]
+          [estimate_categories_attributes: EstimateCategory::REGISTRABLE_ATTRIBUTES]
         )
     end
 end
