@@ -5,7 +5,30 @@
 消費税：<%= @estimate.consumption_tax %> <br />
 総計：<%= @estimate.grand_total %> <br />
 
+<h2>カテゴリー
+</h2>
+<% if @estimate_categories && @active_category %>
+  <ul id="categoriesTabs" class="nav nav-tabs justify-content-center">
+    <% @estimate_categories.each_with_index do |ec, i| %>
+      <%# binding.pry %>
+      <% if ec == @active_category %>
+        <li role="presentation" class="active">
+          <%= link_to estimate_path(@estimate, estimate_category_id: ec.id) do %>
+            <button aria-controls="spot-tab" role="tab" class="nav-link active"><%= ec.name %></button>
+          <% end %>
+        </li>
+      <% else %>
+        <li role="presentation">
+          <%= link_to estimate_path(@estimate, estimate_category_id: ec.id)  do %>
+            <button aria-controls="spot-tab" role="tab" class="nav-link "><%= ec.name %></button>
+          <% end %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
 
+<% if @estimate_details %>
 <% @estimate_details.each do |ed|  %>
   <%= ed.id %>
   <%= ed.estimate_category_id %>
@@ -16,4 +39,5 @@
   <%= ed.quantity %>
   <%= ed.price %>
   <br>
+<% end %>
 <% end %>
