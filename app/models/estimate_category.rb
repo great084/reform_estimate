@@ -3,6 +3,8 @@ class EstimateCategory < ApplicationRecord
   belongs_to :category
   has_many :estimate_details, dependent: :destroy
 
+  validates :category_id, uniqueness: { scope: :estimate_id }
+
   REGISTRABLE_ATTRIBUTES =
     %i[id category_id name subtotal remark _destroy].freeze
 
@@ -11,6 +13,6 @@ class EstimateCategory < ApplicationRecord
   private
 
     def set_name_value
-      self.name = Category.find(category_id)
+      self.name = Category.find(category_id).name
     end
 end

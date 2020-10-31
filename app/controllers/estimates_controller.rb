@@ -6,8 +6,14 @@ class EstimatesController < ApplicationController
   def show
     @estimate = Estimate.find(params[:id])
     @estimate_categories = @estimate.estimate_categories
-    @active_category = params[:id] ? @estimate_categories.find(params[:id]) : @estimate_categories.first
-    @estimate_details = @active_category.estimate_details
+    @active_category = if params[:estimate_category_id]
+                         @estimate_categories.find(params[:estimate_category_id])
+                       else
+                         @estimate_categories.first
+                       end
+    # @active_category = params[:estimate_category_id]
+    # ?  @estimate_categories.find(params[:estimate_category_id]) : @estimate_categories.first
+    @estimate_details = @active_category.estimate_details if @active_category
   end
 
   def new
@@ -16,9 +22,9 @@ class EstimatesController < ApplicationController
 
   def create
     @estimate = Estimate.new(estimate_params)
-    # debugger
+    # binding.pry
     if @estimate.save
-      redirect_to estimates_path, notice: "見積 #{@estimate.subject}を登録しました"
+      redirect_to estimates_path, success: "見積 #{@estimate.subject}を登録しました"
     else
       render :new
     end
@@ -30,9 +36,9 @@ class EstimatesController < ApplicationController
 
   def update
     @estimate = Estimate.find(params[:id])
-    # debugger
-    if @estimate.update!(estimate_params)
-      flash.now[:success] = '見積を更新しました'
+    # binding.pry
+    if @estimate.update(estimate_params)
+      flash[:success] = '見積を更新しました'
       redirect_to edit_estimate_path(@estimate)
     else
       # puts "#{@estimate.errors.full_messages}"
