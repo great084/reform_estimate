@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # get 'estimates/edit'
   # get 'estimates/index'
   # get 'estimates/show'
-  resources :estimates, except: [:destroy]
+  resources :estimates
   resources :categories, only: [:index, :create, :update, :destroy]
   resources :price_tables, only: [:index, :create, :update, :destroy]
   resources :masters, only: [:index]

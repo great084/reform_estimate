@@ -1,10 +1,11 @@
 class EstimatesController < ApplicationController
+  before_action :set_estimate, only: %i[show edit update destroy]
+
   def index
     @estimates = current_user.estimates
   end
 
   def show
-    @estimate = Estimate.find(params[:id])
     @estimate_categories = @estimate.estimate_categories
     @active_category = if params[:estimate_category_id]
                          @estimate_categories.find(params[:estimate_category_id])
@@ -31,23 +32,34 @@ class EstimatesController < ApplicationController
   end
 
   def edit
-    @estimate = Estimate.find(params[:id])
   end
 
   def update
-    @estimate = Estimate.find(params[:id])
     # binding.pry
     if @estimate.update(estimate_params)
       flash[:success] = '見積を更新しました'
       redirect_to edit_estimate_path(@estimate)
     else
-      # puts "#{@estimate.errors.full_messages}"
       flash.now[:danger] = '見積更新できませんでした'
       render :edit
     end
   end
 
+  def destroy
+    if @estimate.destroy
+      flash[:success] = '見積を削除しました'
+      redirect_to estimates_path
+    else
+      flash.now[:danger] = '見積を削除できませんでした'
+      render :estimates_path
+    end
+  end
+
   private
+
+    def set_estimate
+      @estimate = Estimate.find(params[:id])
+    end
 
     # def estimate_params
     #   params
