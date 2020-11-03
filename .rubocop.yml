@@ -44,3 +44,7 @@ Style/IndentationConsistency:
 Rails/BulkChangeTable:
   Exclude:
     - 'db/migrate/*'
+
+# Put empty method definitions on a single line.を有効にしない
+Style/EmptyMethod:
+  Enabled: false
