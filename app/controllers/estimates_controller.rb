@@ -15,6 +15,8 @@ class EstimatesController < ApplicationController
     # @active_category = params[:estimate_category_id]
     # ?  @estimate_categories.find(params[:estimate_category_id]) : @estimate_categories.first
     @estimate_details = @active_category.estimate_details if @active_category
+    # @estimate_detail = @active_category.estimate_details.build
+    @estimate_detail = EstimateDetail.new(estimate_category_id: @active_category)
   end
 
   def new
