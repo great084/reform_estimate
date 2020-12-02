@@ -28,23 +28,16 @@
   </ul>
 <% end %>
 
-<table class="table table-list">
-  <thead>
-    <tr>
-      <th>商品名</th>
-      <th>仕様</th>
-      <th>単位</th>
-      <th>単価</th>
-      <th>数量</th>
-      <th>金額</th>
-      <th>備考</th>
-      <th>操作</th>
-    </tr>
-  </thead>
-
-  <tbody>
-  </tbody>
-</table>
+<div class="row">
+      <div class="col-2">商品名</div>
+      <div class="col-2">仕様</div>
+      <div class="col-1">単位</div>
+      <div class="col-1">単価</div>
+      <div class="col-1">数量</div>
+      <div class="col-1">金額</div>
+      <div class="col-2">備考</div>
+      <div class="col-2">操作</div>
+</div>
 
 <% if @estimate_details %>
 <% @estimate_details.each do |ed| %>
@@ -81,11 +74,13 @@
   <%= form_for(@estimate_detail, url: estimate_details_path, method: :post) do |f| %>
     <div class="form-row">
         <%= f.hidden_field :estimate_category_id, value: @active_category.id %>
-        <div class="form-group col-2">
-          <%= f.collection_select :item_name, selectable_price_tables(@active_category.category), :item_name, :item_name, {}, class: 'form-control' %>
+        <div class="form-group col-4">
+          <%= f.collection_select :price_table_id, selectable_price_tables(@active_category.category), :id, :full_item_name , {}, class: 'form-control', id: 'item-selection' %>
         </div>
-        <div class="form-group col-2">
-          <%= f.text_field :specification, id: 'inputSpecification', class: 'form-control' %>
+        <div class="form-group">
+          <%= f.hidden_field :specification, id: 'inputSpecification specification-selection', class: 'form-control' %>
+          <%# specifications = @estimate_detail.item.try(specification)s %>
+          <%#= render 'estimate_details/work_specification', form: f %>
         </div>
         <div class="form-group col-1">
           <%= f.text_field :unit, id: 'inputUnit', class: 'form-control' %>
@@ -108,9 +103,14 @@
     </div>
   <% end %>
 
+<script>
+  $("#item-selection").change(fucntion(){
+    $("specification-selection").replaceWith()
+  })
+</script>
 
 <% if @estimate_details %>
-<% render partial: 'estimate_details/form', collection: @estimate_details, as: 'estimate_detail' %> 
+<%# render partial: 'estimate_details/form', collection: @estimate_details, as: 'estimate_detail' %> 
 <% @estimate_details.each do |ed|  %>
   <%= ed.id %>
   <%= ed.estimate_category_id %>
