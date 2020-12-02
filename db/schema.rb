@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_31_092503) do
+ActiveRecord::Schema.define(version: 2020_12_02_051825) do
 
   create_table "categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -42,7 +42,9 @@ ActiveRecord::Schema.define(version: 2020_10_31_092503) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "estimate_category_id", null: false
+    t.bigint "price_table_id", null: false
     t.index ["estimate_category_id"], name: "index_estimate_details_on_estimate_category_id"
+    t.index ["price_table_id"], name: "fk_rails_bafc328973"
   end
 
   create_table "estimates", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
@@ -86,6 +88,7 @@ ActiveRecord::Schema.define(version: 2020_10_31_092503) do
   add_foreign_key "estimate_categories", "categories"
   add_foreign_key "estimate_categories", "estimates"
   add_foreign_key "estimate_details", "estimate_categories"
+  add_foreign_key "estimate_details", "price_tables"
   add_foreign_key "estimates", "users"
   add_foreign_key "price_tables", "categories"
 end

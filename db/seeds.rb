@@ -79,8 +79,8 @@ pt3 = PriceTable.find_by(category_id: category2.id, item_name: 'タイル貼り'
 pt4 = PriceTable.find_by(category_id: category2.id, item_name: '運搬搬入費', specification: nil)
 
 estimate_details_params = [
-  {estimate_category_id: pt1.category_id, item_name: pt1.item_name, specification: pt1.specification, unit: pt1.unit, unit_price: pt1.unit_price, quantity: 1000, price: 200000, remark: '備品'},
-  {estimate_category_id: pt2.category_id, item_name: pt2.item_name, specification: pt2.specification, unit: pt2.unit, unit_price: pt2.unit_price, quantity: 500, price: pt2.unit_price*500, remark: '備品'},
+  {price_table_id: pt1.id, estimate_category_id: pt1.category_id, item_name: pt1.item_name, specification: pt1.specification, unit: pt1.unit, unit_price: pt1.unit_price, quantity: 1000, remark: '備品1'},
+  {price_table_id: pt2.id, estimate_category_id: pt2.category_id, item_name: pt2.item_name, specification: pt2.specification, unit: pt2.unit, unit_price: pt2.unit_price, quantity: 500,  remark: '備品2'},
 ]
 
 estimate_category1.estimate_details.create(estimate_details_params)

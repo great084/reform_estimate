@@ -1,5 +1,6 @@
 class EstimateDetail < ApplicationRecord
   belongs_to :estimate_category
+  belongs_to :price_table
   REGISTRABLE_ATTRIBUTES =
     %i[estimate_category_id item_name specification unit unit_price quantity price remark _destroy].freeze
 
