@@ -1,13 +1,14 @@
 class EstimateDetailsController < ApplicationController
   def create
     @estimate_detail = EstimateDetail.new(estimate_detail_params)
-    binding.pry
+    estimate = @estimate_detail.estimate_category.estimate
+    # binding.pry
     if @estimate_detail.save
-      estimate = @estimate_detail.estimate_category.estimate
-      flash[:success] = "見積もり明細を登録しました"
+      flash[:success] = '見積明細を登録しました'
       redirect_to estimate_path(estimate)
     else
-      # render_index()
+      # エラー処理は今後書く
+      flash.now[:danger] = '見積明細の登録できませんでした'
     end
   end
 
@@ -17,8 +18,8 @@ class EstimateDetailsController < ApplicationController
   def destroy
   end
 
-  def ajax
-    @specifications = PriceTable.find_by(category_id: params[:category_id], item_name: params[:item_name])
+  def details
+    @price_table = PriceTable.find_by(id: params[:price_table_id])
   end
 
   private

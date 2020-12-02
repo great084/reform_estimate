@@ -51,13 +51,13 @@
           <%= f.text_field :specification, id: 'inputSpecification', class: 'form-control' %>
         </div>
         <div class="form-group col-1">
-          <%= f.text_field :unit, id: 'inputUnit', class: 'form-control' %>
+          <%= f.text_field :unit, class: 'form-control' %>
         </div>
         <div class="form-group col-1">
-          <%= f.number_field :unit_price, id: 'inputUnitPrice', class: 'form-control' %>
+          <%= f.number_field :unit_price, class: 'form-control' %>
         </div>
         <div class="form-group col-2">
-          <%= f.text_field :remark, id: 'inputRemark', class: 'form-control' %>
+          <%= f.text_field :remark, class: 'form-control' %>
         </div>
         <div class="form-group col-1">
           <%= f.submit '更新',  class: ' btn btn-primary btn-block ' %>
@@ -75,21 +75,19 @@
     <div class="form-row">
         <%= f.hidden_field :estimate_category_id, value: @active_category.id %>
         <div class="form-group col-4">
-          <%= f.collection_select :price_table_id, selectable_price_tables(@active_category.category), :id, :full_item_name , {}, class: 'form-control', id: 'item-selection' %>
+          <%= f.collection_select :price_table_id, selectable_price_tables(@active_category.category), :id, :full_item_name , {}, class: 'form-control', id: 'item-selection', :onchange => "getDetails($(this).val())" %>
         </div>
         <div class="form-group">
           <%= f.hidden_field :specification, id: 'inputSpecification specification-selection', class: 'form-control' %>
-          <%# specifications = @estimate_detail.item.try(specification)s %>
-          <%#= render 'estimate_details/work_specification', form: f %>
         </div>
         <div class="form-group col-1">
-          <%= f.text_field :unit, id: 'inputUnit', class: 'form-control' %>
+          <%= f.text_field :unit, id: 'inputUnit', class: 'form-control', required: true %>
         </div>
         <div class="form-group col-1">
-          <%= f.number_field :unit_price, id: 'inputUnitPrice', class: 'form-control' %>
+          <%= f.number_field :unit_price, id: 'inputUnitPrice', class: 'form-control', required: true %>
         </div>
         <div class="form-group col-1">
-          <%= f.number_field :quantity, id: 'inputQuantity', class: 'form-control' %>
+          <%= f.number_field :quantity, id: 'inputQuantity', class: 'form-control', required: true  %>
         </div>
         <div class="form-group col-1">
           <%= f.number_field :price, id: 'inputPrice', class: 'form-control', readonly: true %>
@@ -102,12 +100,6 @@
         </div>
     </div>
   <% end %>
-
-<script>
-  $("#item-selection").change(fucntion(){
-    $("specification-selection").replaceWith()
-  })
-</script>
 
 <% if @estimate_details %>
 <%# render partial: 'estimate_details/form', collection: @estimate_details, as: 'estimate_detail' %> 
@@ -123,3 +115,17 @@
   <br>
 <% end %>
 <% end %>
+
+<script>
+  function getDetails(val){
+    var price_table_id = val;
+
+    $.ajax({
+      url: "estimate_details/get_details",
+      type: "GET",
+      data: {
+        price_table_id: price_table_id
+      }
+    })
+  }
+</script>

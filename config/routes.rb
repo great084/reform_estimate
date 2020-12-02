@@ -13,5 +13,5 @@ Rails.application.routes.draw do
   get 'home/index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   # jqueryで選択されたアイテムの仕様を取得
-  get 'estimate_details/specifications', to: 'estimate_details#ajax'
+  get 'estimates/estimate_details/get_details', to: 'estimate_details#details'
 end
