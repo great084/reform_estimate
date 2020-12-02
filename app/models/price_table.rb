@@ -1,6 +1,6 @@
 class PriceTable < ApplicationRecord
   belongs_to :category
-  has_many :estimate_details
+  has_many :estimate_detail, dependent: :nullify
 
   validates :specification, uniqueness: { scope: %i[category_id item_name] }
 

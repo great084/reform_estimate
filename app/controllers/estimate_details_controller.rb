@@ -23,9 +23,9 @@ class EstimateDetailsController < ApplicationController
 
   private
 
-  def estimate_detail_params
-    params
-      .require(:estimate_detail)
-      .permit(EstimateDetail::REGISTRABLE_ATTRIBUTES)
-  end
+    def estimate_detail_params
+      params
+        .require(:estimate_detail)
+        .permit(EstimateDetail::REGISTRABLE_ATTRIBUTES)
+    end
 end
