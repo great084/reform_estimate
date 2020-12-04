@@ -45,16 +45,22 @@
     <div class="form-row">
         <%#= f.hidden_field :id %>
         <div class="form-group col-2">
-          <%= f.text_field :item_name ,id: 'inputItemName', class: 'form-control'%>
+          <%= f.text_field :item_name, class: 'form-control', readonly: true %>
         </div>
         <div class="form-group col-2">
-          <%= f.text_field :specification, id: 'inputSpecification', class: 'form-control' %>
+          <%= f.text_field :specification, class: 'form-control', readonly: true %>
         </div>
         <div class="form-group col-1">
           <%= f.text_field :unit, class: 'form-control' %>
         </div>
         <div class="form-group col-1">
           <%= f.number_field :unit_price, class: 'form-control' %>
+        </div>
+        <div class="form-group col-1">
+          <%= f.number_field :quantity, class: 'form-control', required: true  %>
+        </div>
+        <div class="form-group col-1">
+          <%= f.number_field :price, class: 'form-control', readonly: true %>
         </div>
         <div class="form-group col-2">
           <%= f.text_field :remark, class: 'form-control' %>
@@ -105,20 +111,6 @@
   <%= link_to "カテゴリー登録へ", edit_estimate_path(@estimate) %>
 <% end %>
 
-<% if @estimate_details %>
-<%# render partial: 'estimate_details/form', collection: @estimate_details, as: 'estimate_detail' %> 
-<% @estimate_details.each do |ed|  %>
-  <%= ed.id %>
-  <%= ed.estimate_category_id %>
-  <%=  ed.item_name %>
-  <%=  ed.specification  %>
-  <%= ed.unit  %>
-  <%= ed.unit_price  %>
-  <%= ed.quantity %>
-  <%= ed.price %>
-  <br>
-<% end %>
-<% end %>
 
 <script>
   function getDetails(val){
