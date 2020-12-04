@@ -5,8 +5,8 @@
 消費税：<%= @estimate.consumption_tax %> <br />
 総計：<%= @estimate.grand_total %> <br />
 
-<h2>カテゴリー
-</h2>
+<h2>カテゴリー</h2>
+
 <% if @estimate_categories && @active_category %>
   <ul id="categoriesTabs" class="nav nav-tabs justify-content-center">
     <% @estimate_categories.each_with_index do |ec, i| %>
@@ -26,18 +26,18 @@
       <% end %>
     <% end %>
   </ul>
+  <div class="row">
+        <div class="col-2">商品名</div>
+        <div class="col-2">仕様</div>
+        <div class="col-1">単位</div>
+        <div class="col-1">単価</div>
+        <div class="col-1">数量</div>
+        <div class="col-1">金額</div>
+        <div class="col-2">備考</div>
+        <div class="col-2">操作</div>
+  </div>
 <% end %>
 
-<div class="row">
-      <div class="col-2">商品名</div>
-      <div class="col-2">仕様</div>
-      <div class="col-1">単位</div>
-      <div class="col-1">単価</div>
-      <div class="col-1">数量</div>
-      <div class="col-1">金額</div>
-      <div class="col-2">備考</div>
-      <div class="col-2">操作</div>
-</div>
 
 <% if @estimate_details %>
 <% @estimate_details.each do |ed| %>
@@ -70,7 +70,7 @@
 <% end %>
 <% end %>
 
-
+<% if @active_category %>
   <%= form_for(@estimate_detail, url: estimate_details_path, method: :post) do |f| %>
     <div class="form-row">
         <%= f.hidden_field :estimate_category_id, value: @active_category.id %>
@@ -100,6 +100,10 @@
         </div>
     </div>
   <% end %>
+<% else %>
+  <p>まずは、見積もりで使用するカテゴリーを選択してください。</p>
+  <%= link_to "カテゴリー登録へ", edit_estimate_path(@estimate) %>
+<% end %>
 
 <% if @estimate_details %>
 <%# render partial: 'estimate_details/form', collection: @estimate_details, as: 'estimate_detail' %> 
