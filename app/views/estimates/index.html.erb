@@ -13,11 +13,11 @@
   <tbody>
     <% @estimates.each do |estimate| %>
     <tr>
-      <td><%= estimate.customer_name %></td>
       <td><%= estimate.subject %></td>
+      <td><%= estimate.customer_name %></td>
       <td><%= estimate.grand_total %></td>
       <td>
-        <%= link_to "詳細", estimate_path(estimate), class:"btn btn-primary" %>
+        <%= link_to "明細", estimate_path(estimate), class:"btn btn-primary" %>
         <%= link_to "編集", edit_estimate_path(estimate), class:"btn btn-primary" %>
         <%= link_to "削除", estimate_path(estimate), method: :delete, class:"btn btn-primary" %>
       </td>
