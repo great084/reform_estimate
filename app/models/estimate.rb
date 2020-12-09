@@ -1,5 +1,6 @@
 class Estimate < ApplicationRecord
   REGISTRABLE_ATTRIBUTES = %i[user_id subject customer_name].freeze
+  TAX_RATE = 10
 
   belongs_to :user
   # has_many :estimate_details, dependent: :destroy
@@ -12,8 +13,11 @@ class Estimate < ApplicationRecord
   validates :subject, presence: true
   validates :customer_name, presence: true
 
-  # def calculate_estimate_price
-  #   estimate_details.each(&:calculate_estimate_detail_price)
-  #   self.subtotal = estimate_details.map { |ed| ed.price unless ed.marked_for_destruction? }.compact.sum
-  # end
+  def calculate_total
+    # binding.pry
+    self.subtotal = estimate_categories.map(&:subtotal).compact.sum
+    self.consumption_tax = subtotal * TAX_RATE / 100
+    self.grand_total = subtotal + consumption_tax
+    self.save
+  end
 end
