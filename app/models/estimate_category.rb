@@ -9,6 +9,15 @@ class EstimateCategory < ApplicationRecord
     %i[id category_id name subtotal remark _destroy].freeze
 
   before_validation :set_name_value
+  after_commit do
+    estimate.calculate_total
+  end
+
+  def calculate_subtotal
+    # binding.pry
+    self.subtotal = estimate_details.map(&:price).compact.sum
+    self.save
+  end
 
   private
 

@@ -5,8 +5,10 @@ class EstimateDetail < ApplicationRecord
     %i[price_table_id estimate_category_id
        item_name specification unit unit_price quantity price remark _destroy].freeze
 
-  before_validation :calculate_estimate_detail_price
-  before_validation :set_item_name_specification
+  before_validation :autoset_items
+  after_commit do
+    estimate_category.calculate_subtotal
+  end
 
   with_options presence: true do
     validates :item_name
@@ -17,14 +19,18 @@ class EstimateDetail < ApplicationRecord
 
   private
 
-    def calculate_estimate_detail_price
-      self.price = unit_price * quantity
-    rescue StandardError
-      self.price = 0
-    end
+    # def price=
+    #   binding.pry
+    #   begin
+    #     self.price = unit_price * quantity
+    #   rescue StandardError
+    #     self.price = 0
+    #   end
+    # end
 
-    def set_item_name_specification
+    def autoset_items
       self.item_name = price_table.item_name
       self.specification = price_table.specification
+      self.price = unit_price * quantity
     end
 end
