@@ -1,0 +1,27 @@
+<header>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark text-white">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+    <% if user_signed_in? %>
+      <div class="navbar-nav">
+      <%= link_to 'カテゴリ登録', categories_path, class: "nav-link nav-item" %>
+      <%= link_to '単価表登録', price_tables_path, class: "nav-link nav-item" %>
+      <%= link_to '見積一覧', estimates_path, class: "nav-link nav-item"  %>
+      <%= link_to '見積を新規作成', new_estimate_path, class: "nav-link nav-item"  %>
+      </div>
+    <% end %>
+  </div>
+    <div class="navbar-nav">
+      <% if user_signed_in? %>
+        <p class="nav-item nav-link my-auto mr-4">ログインユーザ： @<%= current_user.nickname %></p>
+        <%= link_to 'プロフィール変更', edit_user_registration_path, class: "nav-link nav-item" %>
+        <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "nav-link nav-item"  %>
+      <% else %>
+        <%= link_to 'サインアップ', new_user_registration_path, class: "nav-link nav-item" %>
+        <%= link_to 'ログイン', new_user_session_path, class: "nav-link nav-item" %>
+      <% end %>
+    </div>
+</nav>
+</header>
