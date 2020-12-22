@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 2020_12_02_051825) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "estimate_category_id", null: false
-    t.bigint "price_table_id", null: false
+    t.bigint "price_table_id"
     t.index ["estimate_category_id"], name: "index_estimate_details_on_estimate_category_id"
     t.index ["price_table_id"], name: "fk_rails_bafc328973"
   end

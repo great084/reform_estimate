@@ -25,6 +25,7 @@ categories_params = [
   {name: '塗装工事'},
   {name: '内装工事'},
   {name: '外部工事'},
+  {name: '屋根工事'},
   {name: '電気設備工事'},
   {name: '給排水設備工事'},
   {name: '解体工事'},
@@ -34,6 +35,26 @@ user.categories.create(categories_params)
 
 
 # PriceTableデータ
+category3 = Category.find_by(name: '仮設工事')
+price_tables3_params = [
+  {item_name: '外部足場', specification: nil, unit: '㎡', unit_price: 1300},
+  {item_name: 'メッシュシート', specification: nil, unit: '㎡', unit_price: 250},
+  {item_name: '昇降階段', specification: nil, unit: '基', unit_price: 25000},
+  {item_name: '柱・水平養生', specification: nil, unit: '式', unit_price: 45000},
+  {item_name: '場内小運搬', specification: nil, unit: '㎡', unit_price: 350},
+]
+
+category3.price_tables.create(price_tables3_params)
+
+category4 = Category.find_by(name: '屋根工事')
+price_tables4_params = [
+  {item_name: '野地板貼り', specification: '構造用合板12ミリ', unit: '式', unit_price: 1800000},
+  {item_name: 'メタルルーフ本体', specification: nil, unit: '枚', unit_price: 2500},
+  {item_name: '軒先瓦', specification: nil, unit: '枚', unit_price: 2600},
+]
+
+category4.price_tables.create(price_tables4_params)
+
 category1 = Category.find_by(name: '塗装工事')
 price_tables1_params = [
   {item_name: '塗りつぶし塗装', specification: '建具　現場塗装', unit: '式', unit_price: 120000},
