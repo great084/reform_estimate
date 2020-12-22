@@ -1,11 +1,12 @@
+<h2 class="mt-2 mb-2">基本情報</h2>
 
 顧客名：<%= @estimate.customer_name %>様 <br />
 見積内容：<%= @estimate.subject %> <br />
-小計：<%= @estimate.subtotal %> <br />
-消費税：<%= @estimate.consumption_tax %> <br />
-総計：<%= @estimate.grand_total %> <br />
+小計：<%= @estimate.subtotal.to_s(:delimited) %>円 <br />
+消費税：<%= @estimate.consumption_tax.to_s(:delimited) %>円 <br />
+総計：<%= @estimate.grand_total.to_s(:delimited) %>円 <br />
 
-<h2>カテゴリー</h2>
+<h2 class="mt-4 mb-2">明細</h2>
 
 <% if @estimate_categories && @active_category %>
   <ul id="categoriesTabs" class="nav nav-tabs justify-content-center">
@@ -32,8 +33,8 @@
         <div class="col-1">単位</div>
         <div class="col-1">単価</div>
         <div class="col-1">数量</div>
-        <div class="col-1">金額</div>
-        <div class="col-2">備考</div>
+        <div class="col-2">金額</div>
+        <div class="col-1">備考</div>
         <div class="col-2">操作</div>
   </div>
 <% end %>
@@ -59,10 +60,10 @@
         <div class="form-group col-1">
           <%= f.number_field :quantity, class: 'form-control', required: true  %>
         </div>
-        <div class="form-group col-1">
-          <%= f.number_field :price, class: 'form-control', readonly: true %>
-        </div>
         <div class="form-group col-2">
+          <%= f.text_field :price, value: ed.price.to_s(:delimited), class: 'form-control', readonly: true %>
+        </div>
+        <div class="form-group col-1">
           <%= f.text_field :remark, class: 'form-control' %>
         </div>
         <div class="form-group col-1">
@@ -79,9 +80,9 @@
         <div class="col-2"></div>
         <div class="col-1"></div>
         <div class="col-1"></div>
-        <div class="col-1">合計</div>
-        <div class="col-1"><%= @active_category.subtotal %>円</div>
-        <div class="col-2"></div>
+        <div class="col-1">計</div>
+        <div class="col-2"><%= @active_category.subtotal.to_s(:delimited) %>円</div>
+        <div class="col-1"></div>
         <div class="col-2"></div>
   </div>
 <% end %>
@@ -105,10 +106,10 @@
         <div class="form-group col-1">
           <%= f.number_field :quantity, id: 'inputQuantity', class: 'form-control', required: true  %>
         </div>
-        <div class="form-group col-1">
+        <div class="form-group col-2">
           <%= f.number_field :price, id: 'inputPrice', class: 'form-control', readonly: true %>
         </div>
-        <div class="form-group col-2">
+        <div class="form-group col-1">
           <%= f.text_field :remark, id: 'inputRemark', class: 'form-control' %>
         </div>
         <div class="form-group col-2">
