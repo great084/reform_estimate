@@ -23,6 +23,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise'
 
 gem 'cocoon'
+gem 'rails-i18n'
 
 # デバッグ用
 gem 'pry-rails'

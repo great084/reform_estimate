@@ -1,0 +1,15 @@
+ja:
+  activerecord:
+    models:
+      category: カテゴリー
+      price_table: 単価表
+      price_tables: 単価表
+    attributes:
+      category:
+        category_name: カテゴリー名
+    errors:
+      messages:
+        record:
+          price tables: 単価表
+          price_table: 単価表
+          price_tables: 単価表
