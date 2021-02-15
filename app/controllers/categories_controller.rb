@@ -43,7 +43,7 @@ class CategoriesController < ApplicationController
       flash[:success] = '削除しました。'
       redirect_to index
     else
-      render_index('削除に失敗しました。')
+      render_index("削除に失敗しました。#{@category.errors.full_messages}")
     end
   end
 
