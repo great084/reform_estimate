@@ -23,6 +23,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise'
 
 gem 'cocoon'
+gem 'rack-rewrite', '~> 1.5.0'
 
 # デバッグ用
 gem 'pry-rails'
